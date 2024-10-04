@@ -74,20 +74,70 @@
     </div>
 
     <script>
+        
         const preguntas = [
-            {
-                pregunta: "Resuelve la siguiente Suma",
-                problema: "11 + 2",
-                respuestas: ["22", "11", "13", "45"],
-                correct: 2
-            },
-            {
-                pregunta: "Resuelve la siguiente Suma",
-                problema: "20 + 2",
-                respuestas: ["22", "11", "13", "45"],
-                correct: 2
-            }
-        ];
+    {
+        pregunta: "Resuelve la siguiente Suma",
+        problema: "11 + 2",
+        respuestas: ["22", "11", "13", "45"],
+        correct: 2
+    },
+    {
+        pregunta: "Resuelve la siguiente Suma",
+        problema: "20 + 2",
+        respuestas: ["22", "11", "13", "45"],
+        correct: 0
+    },
+    {
+        pregunta: "Resuelve la siguiente Multiplicación",
+        problema: "3 x 4",
+        respuestas: ["7", "12", "15", "9"],
+        correct: 1
+    },
+    {
+        pregunta: "Resuelve la siguiente División",
+        problema: "12 ÷ 4",
+        respuestas: ["1", "2", "3", "4"],
+        correct: 2
+    },
+    {
+        pregunta: "Resuelve la siguiente Resta",
+        problema: "15 - 6",
+        respuestas: ["9", "10", "11", "8"],
+        correct: 0
+    },
+    {
+        pregunta: "Resuelve la siguiente Suma",
+        problema: "7 + 8",
+        respuestas: ["12", "14", "15", "16"],
+        correct: 2
+    },
+    {
+        pregunta: "Resuelve la siguiente Multiplicación",
+        problema: "5 x 5",
+        respuestas: ["20", "25", "30", "35"],
+        correct: 1
+    },
+    {
+        pregunta: "Resuelve la siguiente División",
+        problema: "16 ÷ 4",
+        respuestas: ["4", "5", "6", "3"],
+        correct: 0
+    },
+    {
+        pregunta: "Resuelve la siguiente Resta",
+        problema: "18 - 9",
+        respuestas: ["9", "10", "8", "11"],
+        correct: 0
+    },
+    {
+        pregunta: "Resuelve la siguiente Suma",
+        problema: "9 + 10",
+        respuestas: ["19", "20", "21", "18"],
+        correct: 0
+    }
+];
+
 
         let currentQuestion = 0;
 
@@ -103,6 +153,7 @@
                 li.onclick = () => checkAnswer(index);
                 respuestas.appendChild(li);
             });
+            document.getElementById('nextBtn').style.display = 'none'; // Ocultar el botón Next al cargar una nueva pregunta
         }
 
         function checkAnswer(index) {
@@ -112,6 +163,7 @@
             } else {
                 alert("Incorrecto.");
             }
+            nextQuestion(); // Avanza automáticamente a la siguiente pregunta
         }
 
         function nextQuestion() {
