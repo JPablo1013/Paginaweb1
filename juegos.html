@@ -60,8 +60,10 @@
             margin-top: 20px;
             font-size: 1.5rem;
         }
-        #nextBtn:hover {
-            background-color: #21a1f1;
+        .mensaje {
+            font-size: 2rem;
+            margin-top: 20px;
+            height: 40px; /* Para dar espacio al mensaje */
         }
     </style>
 </head>
@@ -70,7 +72,7 @@
         <div id="pregunta" class="pregunta"></div>
         <div id="problema" class="problema"></div>
         <ul id="respuestas" class="respuestas"></ul>
-        <button id="nextBtn" onclick="nextQuestion()">Next</button>
+        <div id="mensaje" class="mensaje"></div> <!-- Elemento para mostrar mensajes -->
     </div>
 
     <script>
@@ -137,7 +139,12 @@
         correct: 0
     }
 ];
-
+        function shuffleQuestions() {
+            for (let i = preguntas.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [preguntas[i], preguntas[j]] = [preguntas[j], preguntas[i]];
+            }
+        }
 
         let currentQuestion = 0;
 
@@ -153,17 +160,18 @@
                 li.onclick = () => checkAnswer(index);
                 respuestas.appendChild(li);
             });
-            document.getElementById('nextBtn').style.display = 'none'; // Ocultar el botón Next al cargar una nueva pregunta
+            document.getElementById('mensaje').innerText = ''; // Limpiar mensaje al cargar una nueva pregunta
         }
 
         function checkAnswer(index) {
             const q = preguntas[currentQuestion];
+            const mensaje = document.getElementById('mensaje');
             if (index === q.correct) {
-                alert("¡Correcto!");
+                mensaje.innerText = "¡Correcto!";
             } else {
-                alert("Incorrecto.");
+                mensaje.innerText = "Incorrecto.";
             }
-            nextQuestion(); // Avanza automáticamente a la siguiente pregunta
+            setTimeout(nextQuestion, 1500); // Espera 1.5 segundos antes de avanzar
         }
 
         function nextQuestion() {
@@ -174,7 +182,9 @@
                 alert("¡Has completado el cuestionario!");
             }
         }
+        
 
+        shuffleQuestions();
         loadQuestion();
     </script>
 </body>
