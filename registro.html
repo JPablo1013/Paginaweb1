@@ -1,56 +1,51 @@
-<form action="login.php?action=login" method="post">
-
-<form action="login.perfil.php?action=login" method="post">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
     <link rel="stylesheet" href="registro.css">
-    <!-- Email input -->
-    <div class="form-outline mb-4">
-        <input type="email" id="form2Example1" class="form-control" name="correo">
-        <label class="form-label" for="form2Example1">Correo</label>
-    </div>
+    <script>
+        function redirectToLogin(event) {
+            event.preventDefault(); // Evita el envío del formulario
+            // Aquí puedes agregar la lógica para enviar los datos del formulario si es necesario
+            window.location.href = 'inicio-sesion.html'; // Redirige a la página de inicio de sesión
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Registro</h2>
+            <form action="login.perfil.php?action=login" method="post" onsubmit="redirectToLogin(event)">
+                <!-- Nombre input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="form2Example0" class="form-control" name="nombre" required>
+                    <label class="form-label" for="form2Example0">Nombre</label>
+                </div>
 
-    <!-- Password input -->
-    <div class="form-outline mb-4">
-        <input type="password" id="form2Example2" class="form-control" name="password" />
-        <label class="form-label" for="form2Example2">Password</label>
-    </div>
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    <input type="email" id="form2Example1" class="form-control" name="correo" required>
+                    <label class="form-label" for="form2Example1">Correo</label>
+                </div>
 
-    <!-- 2 column grid layout for inline styling -->
-    <div class="row mb-4">
-        <div class="col d-flex justify-content-center">
-            <!-- Checkbox -->
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                <label class="form-check-label" for="form2Example31"> Remember me </label>
-            </div>
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                    <input type="password" id="form2Example2" class="form-control" name="password" required>
+                    <label class="form-label" for="form2Example2">Password</label>
+                </div>
+
+                <!-- Checkbox -->
+                <div class="form-check mb-4">
+                    <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked>
+                    <label class="form-check-label" for="form2Example31"> Recordarme </label>
+                </div>
+
+                <!-- Submit button -->
+                <input type="submit" class="btn btn-primary btn-block mb-4" value="Registrar">
+            </form>
         </div>
-
-        <div class="col">
-            <!-- Simple link -->
-            <a href="login.php?action=forgot">Forgot password?</a>
-        </div>
     </div>
-
-    <!-- Submit button -->
-    <input type="submit" class="btn btn-primary btn-block mb-4" value="Login">
-
-    <!-- Register buttons -->
-    <div class="text-center">
-        <p>Not a member? <a href="../register.php">Register</a></p>
-        <p>or sign up with:</p>
-        <button type="button" class="btn btn-link btn-floating mx-1">
-            <i class="fab fa-facebook-f"></i>
-        </button>
-
-        <button type="button" class="btn btn-link btn-floating mx-1">
-            <i class="fab fa-google"></i>
-        </button>
-
-        <button type="button" class="btn btn-link btn-floating mx-1">
-            <i class="fab fa-twitter"></i>
-        </button>
-
-        <button type="button" class="btn btn-link btn-floating mx-1">
-            <i class="fab fa-github"></i>
-        </button>
-    </div>
-</form>
+</body>
+</html>

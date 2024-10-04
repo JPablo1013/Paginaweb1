@@ -68,28 +68,3 @@ body {
 .btn:hover {
     background-color: #0056b3;
 }
-
-.text-center {
-    text-align: center;
-}
-
-.btn-link {
-    background: none;
-    border: none;
-    color: #007BFF;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.btn-link:hover {
-    text-decoration: underline;
-}
-
-.btn-floating {
-    background: none;
-    border: none;
-    color: #007BFF;
-    cursor: pointer;
-    font-size: 1.5em;
-    margin: 0 5px;
-}
