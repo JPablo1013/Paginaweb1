@@ -50,19 +50,10 @@
             background-color: #21a1f1;
             transform: scale(1.05);
         }
-        #nextBtn {
-            background-color: #61dafb;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+        .mensaje {
+            font-size: 2rem;
             margin-top: 20px;
-            font-size: 1.5rem;
-            display: none; /* Ocultar el botón inicialmente */
-        }
-        #nextBtn:hover {
-            background-color: #21a1f1;
+            height: 40px; /* Para dar espacio al mensaje */
         }
     </style>
 </head>
@@ -71,7 +62,7 @@
         <div id="pregunta" class="pregunta"></div>
         <div id="problema" class="problema"></div>
         <ul id="respuestas" class="respuestas"></ul>
-        <button id="nextBtn" onclick="nextQuestion()">Next</button>
+        <div id="mensaje" class="mensaje"></div> <!-- Elemento para mostrar mensajes -->
     </div>
 
     <script>
@@ -104,17 +95,18 @@
                 li.onclick = () => checkAnswer(index);
                 respuestas.appendChild(li);
             });
-            document.getElementById('nextBtn').style.display = 'none'; // Ocultar el botón Next al cargar una nueva pregunta
+            document.getElementById('mensaje').innerText = ''; // Limpiar mensaje al cargar una nueva pregunta
         }
 
         function checkAnswer(index) {
             const q = preguntas[currentQuestion];
+            const mensaje = document.getElementById('mensaje');
             if (index === q.correct) {
-                alert("¡Correcto!");
+                mensaje.innerText = "¡Correcto!";
             } else {
-                alert("Incorrecto.");
+                mensaje.innerText = "Incorrecto.";
             }
-            nextQuestion(); // Avanza automáticamente a la siguiente pregunta
+            setTimeout(nextQuestion, 1500); // Espera 1.5 segundos antes de avanzar
         }
 
         function nextQuestion() {
