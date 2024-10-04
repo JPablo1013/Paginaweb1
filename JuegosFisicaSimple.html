@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juegos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #282c34;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .quiz-container {
+            background-color: #3b3f45;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        .pregunta {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .problema {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .respuestas {
+            list-style-type: none;
+            padding: 0;
+        }
+        .respuestas li {
+            background-color: #61dafb;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 2rem;
+        }
+        .respuestas li:hover {
+            background-color: #21a1f1;
+            transform: scale(1.05);
+        }
+        #nextBtn {
+            background-color: #61dafb;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            font-size: 1.5rem;
+            display: none; /* Ocultar el botón inicialmente */
+        }
+        #nextBtn:hover {
+            background-color: #21a1f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="pregunta" class="pregunta"></div>
+        <div id="problema" class="problema"></div>
+        <ul id="respuestas" class="respuestas"></ul>
+        <button id="nextBtn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const preguntas = [
+            {
+                pregunta: "Resuelve la siguiente Suma",
+                problema: "11 + 2",
+                respuestas: ["22", "11", "13", "45"],
+                correct: 2
+            },
+            {
+                pregunta: "Resuelve la siguiente Suma",
+                problema: "20 + 2",
+                respuestas: ["22", "11", "13", "45"],
+                correct: 0 // Cambiado a 0 para que la respuesta correcta sea la primera opción
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = preguntas[currentQuestion];
+            document.getElementById('pregunta').innerText = q.pregunta;
+            document.getElementById('problema').innerText = q.problema || '';
+            const respuestas = document.getElementById('respuestas');
+            respuestas.innerHTML = '';
+            q.respuestas.forEach((respuesta, index) => {
+                const li = document.createElement('li');
+                li.innerText = respuesta;
+                li.onclick = () => checkAnswer(index);
+                respuestas.appendChild(li);
+            });
+            document.getElementById('nextBtn').style.display = 'none'; // Ocultar el botón Next al cargar una nueva pregunta
+        }
+
+        function checkAnswer(index) {
+            const q = preguntas[currentQuestion];
+            if (index === q.correct) {
+                alert("¡Correcto!");
+            } else {
+                alert("Incorrecto.");
+            }
+            nextQuestion(); // Avanza automáticamente a la siguiente pregunta
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < preguntas.length) {
+                loadQuestion();
+            } else {
+                alert("¡Has completado el cuestionario!");
+                currentQuestion = 0; // Reinicia el cuestionario
+                loadQuestion(); // Carga la primera pregunta nuevamente
+            }
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
