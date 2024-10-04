@@ -55,6 +55,12 @@
             margin-top: 20px;
             height: 40px; /* Para dar espacio al mensaje */
         }
+        .resultado {
+            font-size: 2rem;
+            margin-top: 20px;
+            color: #61dafb; /* Color para la puntuación */
+            height: 40px; /* Para dar espacio al resultado */
+        }
     </style>
 </head>
 <body>
@@ -63,6 +69,7 @@
         <div id="problema" class="problema"></div>
         <ul id="respuestas" class="respuestas"></ul>
         <div id="mensaje" class="mensaje"></div> <!-- Elemento para mostrar mensajes -->
+        <div id="resultado" class="resultado"></div> <!-- Elemento para mostrar la puntuación final -->
     </div>
 
     <script>
@@ -78,10 +85,34 @@
                 problema: "20 + 2",
                 respuestas: ["22", "11", "13", "45"],
                 correct: 0 // Cambiado a 0 para que la respuesta correcta sea la primera opción
+            },
+            {
+                pregunta: "Resuelve la siguiente Suma",
+                problema: "5 + 3",
+                respuestas: ["5", "8", "9", "2"],
+                correct: 1
+            },
+            {
+                pregunta: "Resuelve la siguiente Suma",
+                problema: "7 + 4",
+                respuestas: ["10", "12", "11", "13"],
+                correct: 2
             }
         ];
 
+        // Función para mezclar las preguntas de manera aleatoria
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Mezcla las preguntas al inicio
+        shuffle(preguntas);
+
         let currentQuestion = 0;
+        let score = 0; // Variable para llevar la cuenta de respuestas correctas
 
         function loadQuestion() {
             const q = preguntas[currentQuestion];
@@ -96,6 +127,7 @@
                 respuestas.appendChild(li);
             });
             document.getElementById('mensaje').innerText = ''; // Limpiar mensaje al cargar una nueva pregunta
+            document.getElementById('resultado').innerText = ''; // Limpiar resultado al cargar una nueva pregunta
         }
 
         function checkAnswer(index) {
@@ -103,6 +135,7 @@
             const mensaje = document.getElementById('mensaje');
             if (index === q.correct) {
                 mensaje.innerText = "¡Correcto!";
+                score++; // Incrementa la puntuación por respuesta correcta
             } else {
                 mensaje.innerText = "Incorrecto.";
             }
@@ -114,9 +147,16 @@
             if (currentQuestion < preguntas.length) {
                 loadQuestion();
             } else {
-                alert("¡Has completado el cuestionario!");
-                currentQuestion = 0; // Reinicia el cuestionario
-                loadQuestion(); // Carga la primera pregunta nuevamente
+                // Muestra la puntuación final en la página
+                const resultado = document.getElementById('resultado');
+                resultado.innerText = `¡Has completado el cuestionario! Tu puntuación es: ${score} de ${preguntas.length}`;
+                // Reinicia el cuestionario
+                currentQuestion = 0;
+                score = 0; // Reinicia la puntuación
+                setTimeout(() => {
+                    shuffle(preguntas); // Mezcla las preguntas nuevamente
+                    loadQuestion(); // Carga la primera pregunta nuevamente después de 3 segundos
+                }, 3000);
             }
         }
 
